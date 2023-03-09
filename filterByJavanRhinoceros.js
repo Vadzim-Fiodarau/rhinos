@@ -1,15 +1,12 @@
 
+import { onFilterRhino } from '../../support/page_objects/filterRhino'
+
 describe('Verify that when filtering by "javan_rhinoceros" in the GET action, the newly created rhino is present in the search result.', ()=> {
+    beforeEach('open application', () => {
+        cy.openPageHome()
+    })
+    
     it('Verify filter by "javan_rhinoceros"', ()=>{
-        cy.visit('/')
-
-        cy.get('.rhino-inputs form').then(form => {
-            cy.wrap(form).eq(1).find('[id="create_rhino_species"]').type('javan_rhinoceros')
-            cy.wrap(form).eq(1).find('button').click()
-
-
-        })
-
-        cy.get('table').should('contain', 'Clyde500').and('contain', 'javan_rhinoceros')
+        onFilterRhino.filterRhinoByJavanRhinoceres('javan_rhinoceros')
     })
 })
